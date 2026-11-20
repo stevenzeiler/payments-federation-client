@@ -31,6 +31,8 @@ Response handling in `src/index.js`:
 | `result: "error"` | rejects with `FederatedNameError` carrying `error_message` |
 | anything else | rejects with the raw response body |
 
+`FederatedNameError` is not exposed on `client.Errors` (only `NameNotFound` is), so check `error.message` for it.
+
 The server half of the pair is [payments-federation-builder](https://github.com/stevenzeiler/payments-federation-builder), which produces responses in exactly this shape.
 
 ## Getting started
