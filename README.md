@@ -47,7 +47,7 @@ node_modules/.bin/gulp      # compiles src/ to build/ with gulp-babel (the defau
 ## Usage
 
 ```js
-var Federation = require('payments-federation-client')   // build/index.js (default export under ES module interop)
+var Federation = require('payments-federation-client')   // build/index.js; its last line is module.exports = the class
 var client = new Federation('https://example.com/ripple.federation')   // endpoint URL
 
 client.lookup('joseph', 'example.com')
@@ -55,7 +55,7 @@ client.lookup('joseph', 'example.com')
   .catch(function (error) { console.error(error.message) })
 ```
 
-The ES6 source default-exports the class, so with `babel` compiled output you may need `.default` depending on your loader **(inference; not run)**. `client.Errors.NameNotFound` exposes the not-found error class. The client currently `console.log`s each request URL.
+The ES6 source default-exports the class; the Babel 5 output ends with `module.exports = exports['default']`, so `require` returns the class directly (read from `build/index.js`, not run). `client.Errors.NameNotFound` exposes the not-found error class. The client currently `console.log`s each request URL.
 
 ## Project history
 
